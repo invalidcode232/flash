@@ -1,3 +1,7 @@
+"use client";
+
+import { NavBar } from "@/components/widgets/navbar";
+
 const DashboardLayout = ({
   children,
 }: Readonly<{
@@ -5,7 +9,8 @@ const DashboardLayout = ({
 }>) => {
   return (
     <div className="text-slate-500">
-      <div className="dashboard-layout__content">{children}</div>
+      <NavBar />
+      <div className="px-14 md:px-28 md:py-4 lg:px-48">{children}</div>
     </div>
   );
 };
