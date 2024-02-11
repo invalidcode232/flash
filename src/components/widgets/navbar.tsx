@@ -52,7 +52,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-export function NavBar() {
+const NavBar = () => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -121,7 +121,7 @@ export function NavBar() {
       </NavigationMenuList>
     </NavigationMenu>
   );
-}
+};
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -148,3 +148,5 @@ const ListItem = React.forwardRef<
   );
 });
 ListItem.displayName = "ListItem";
+
+export default NavBar;
