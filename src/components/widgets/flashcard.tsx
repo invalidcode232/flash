@@ -30,8 +30,8 @@ const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
         <CardTitle className="text-2xl lg:text-4xl">
           {flashcard.question}
         </CardTitle>
-        <CardDescription className="md:text-md lg:text-lg">
-          Card Description
+        <CardDescription className="lg:text-md md:text-sm">
+          Math - Basics
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -74,9 +74,9 @@ const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
           </div>
         )}
       </CardContent>
-      <CardFooter>
+      {/* <CardFooter>
         <p>Card Footer</p>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 };
