@@ -1,5 +1,3 @@
-"use client";
-
 import NavBar from "@/components/widgets/navbar";
 
 const DashboardLayout = ({
