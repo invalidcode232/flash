@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -7,42 +9,70 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup } from "@/components/ui/radio-group";
 import RadioChoice from "./radiochoice";
 import { Button } from "../ui/button";
+import { Prisma } from "@prisma/client";
+import { useState } from "react";
 
-type FlashcardData = {
-  question: string;
-  answer: string;
-};
+type FlashcardWithChoices = Prisma.FlashcardGetPayload<{
+  include: {
+    choices: true;
+  };
+}>;
 
-const Flashcard = ({ question, answer }: FlashcardData) => {
+const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
+  const [showAnswer, setShowAnswer] = useState(false);
+
   return (
-    <Card className="w-screen md:w-4/5 md:px-8 lg:px-12">
+    <Card className="w-screen md:w-5/6 md:px-8 lg:px-12">
       <CardHeader>
-        <CardTitle className="text-2xl lg:text-4xl">{question}</CardTitle>
+        <CardTitle className="text-2xl lg:text-4xl">
+          {flashcard.question}
+        </CardTitle>
         <CardDescription className="md:text-md lg:text-lg">
           Card Description
         </CardDescription>
       </CardHeader>
       <CardContent>
         <RadioGroup>
-          <RadioChoice id="1" label="2" />
-          <RadioChoice id="2" label="5" />
+          {flashcard.choices.map((choice) => (
+            <RadioChoice key={choice.id} id={choice.id} label={choice.choice} />
+          ))}
         </RadioGroup>
 
-        <div className="mt-4 grid-cols-3 gap-3 md:grid">
-          <Button className="mb-2 w-full bg-green-500 py-3 hover:bg-green-600">
-            Easy (+3 days)
+        {!showAnswer && (
+          <Button
+            onClick={() => setShowAnswer(!showAnswer)}
+            className="mt-4 w-full bg-blue-500 py-3 hover:bg-blue-600"
+          >
+            Show Answer
           </Button>
-          <Button className="mb-2 w-full bg-yellow-500 py-3 hover:bg-yellow-600">
-            Had to think.. (+1 days)
-          </Button>
-          <Button className="mb-2 w-full bg-red-500 py-3 hover:bg-red-600">
-            Hard (+6 hour)
-          </Button>
-        </div>
+        )}
+
+        {showAnswer && (
+          <div>
+            {flashcard.choices.map(
+              (choice) =>
+                choice.is_correct && (
+                  <p key={choice.id} className="mt-4 text-green-500">
+                    Correct Answer: {choice.choice}
+                  </p>
+                ),
+            )}
+            <div className="mt-4 grid-cols-3 gap-3 md:grid">
+              <Button className="mb-2 w-full bg-green-500 py-3 hover:bg-green-600">
+                Easy (+3 days)
+              </Button>
+              <Button className="mb-2 w-full bg-yellow-500 py-3 hover:bg-yellow-600">
+                Had to think.. (+1 days)
+              </Button>
+              <Button className="mb-2 w-full bg-red-500 py-3 hover:bg-red-600">
+                Hard (+6 hour)
+              </Button>
+            </div>
+          </div>
+        )}
       </CardContent>
       <CardFooter>
         <p>Card Footer</p>
