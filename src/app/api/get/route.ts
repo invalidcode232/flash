@@ -15,7 +15,5 @@ export async function GET(req: Request) {
     },
   });
 
-  console.log(flashcard);
-
   return new Response(JSON.stringify(flashcard));
 }
