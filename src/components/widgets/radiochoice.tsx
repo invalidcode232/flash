@@ -1,6 +1,6 @@
 "use client";
 import { RadioGroupItem } from "../ui/radio-group";
-import { FormLabel } from "../ui/form";
+import { FormControl, FormLabel } from "../ui/form";
 
 type ChoiceData = {
   id: string;
@@ -10,12 +10,16 @@ type ChoiceData = {
 
 const RadioChoice = ({ id, label, value }: ChoiceData) => {
   return (
-    <div className="flex items-center space-x-2 rounded-md border-2 border-slate-200 p-4">
-      <RadioGroupItem value={value} />
-      <FormLabel htmlFor={id} className="text-2xl">
-        {label}
-      </FormLabel>
-    </div>
+    <>
+      <FormControl>
+        <RadioGroupItem value={value} id={id} />
+      </FormControl>
+      <FormControl>
+        <FormLabel htmlFor={id} className="ml-1 text-sm">
+          {label}
+        </FormLabel>
+      </FormControl>
+    </>
   );
 };
 

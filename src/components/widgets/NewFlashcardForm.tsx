@@ -45,11 +45,14 @@ const NewFlashcardForm = () => {
               />
             </FormControl>
           </FormItem>
+
           <FormControl>
             <RadioGroup>
               {fields.map((field, index) => (
                 <FormItem key={field.id}>
-                  <FormLabel>Choice {index + 1}</FormLabel>
+                  <FormControl>
+                    <FormLabel>Choice {index + 1}</FormLabel>
+                  </FormControl>
                   <FormControl>
                     <Input
                       type="text"
@@ -71,7 +74,11 @@ const NewFlashcardForm = () => {
                     />
                   </FormControl>
 
-                  <Button type="button" onClick={() => remove(index)}>
+                  <Button
+                    type="button"
+                    className="ml-2 bg-red-500 text-sm"
+                    onClick={() => remove(index)}
+                  >
                     Remove Choice
                   </Button>
                 </FormItem>
@@ -80,6 +87,7 @@ const NewFlashcardForm = () => {
           </FormControl>
           <Button
             type="button"
+            className="my-2 bg-green-500"
             onClick={() => append({ text: "", isCorrect: false })}
           >
             Add Choice
