@@ -14,8 +14,7 @@ import { Button } from "../ui/button";
 import { Prisma } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { z } from "zod";
-import { Form, FormControl, FormField } from "@/components/ui/form";
+import { Form, FormField } from "@/components/ui/form";
 import useSWR from "swr";
 
 type FlashcardWithChoices = Prisma.FlashcardGetPayload<{
@@ -56,6 +55,7 @@ const Flashcard = ({
       }),
     }).then((res) => {
       setShouldUpdateDate(false);
+      reload();
       return res.json();
     }),
   );

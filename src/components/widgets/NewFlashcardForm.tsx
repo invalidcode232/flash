@@ -11,6 +11,7 @@ import { Input } from "../ui/input";
 import { Button } from "@/components/ui/button";
 import { RadioGroup } from "../ui/radio-group";
 import RadioChoice from "./radiochoice";
+import useSWR from "swr";
 
 interface ChoiceData {
   text: string; // The text content of the choice
@@ -18,6 +19,7 @@ interface ChoiceData {
 }
 
 const NewFlashcardForm = () => {
+  // send the form data to the server
   const form = useForm();
 
   const control = form.control;
