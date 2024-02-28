@@ -10,8 +10,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "@/components/ui/button";
 import { RadioGroup } from "../ui/radio-group";
-import RadioChoice from "./radiochoice";
-import useSWR from "swr";
+import { useSWRConfig } from "swr";
 
 interface ChoiceData {
   text: string; // The text content of the choice
@@ -19,6 +18,8 @@ interface ChoiceData {
 }
 
 const NewFlashcardForm = () => {
+  const { fetcher, mutate } = useSWRConfig();
+
   // send the form data to the server
   const form = useForm();
 
@@ -28,8 +29,14 @@ const NewFlashcardForm = () => {
     name: "choices",
   });
 
-  const onSubmit = (data: ChoiceData[]) => {
-    console.log("Submitted Choices:", data);
+  const onSubmit = async (data: ChoiceData[]) => {
+    if (fetcher === undefined) return;
+
+    console.log(data);
+
+    await fetcher("api/flashcards/create", data);
+
+    location.reload();
   };
 
   return (
@@ -65,14 +72,18 @@ const NewFlashcardForm = () => {
                   </FormControl>
 
                   <FormControl>
-                    <RadioChoice
-                      // type="radio"
+                    <FormLabel className="mr-2 text-sm">Is Correct?</FormLabel>
+                  </FormControl>
+                  <FormControl>
+                    <input
+                      type="radio"
                       // name={`choice-isCorrect-${index}`}
-                      label="Is Correct?"
+                      // label="Is Correct?"
                       value={index.toString()}
                       key={index}
                       id={index.toString()}
-                      // {...form.register(`choices.${index}.isCorrect`)}
+                      // register={form.register}
+                      {...form.register(`choices.${index}.isCorrect`)}
                     />
                   </FormControl>
 
@@ -96,9 +107,11 @@ const NewFlashcardForm = () => {
             Add Choice
           </Button>
         </div>
-        <Button className="my-3 bg-blue-500 hover:bg-blue-600" type="submit">
-          Add Flashcard
-        </Button>
+        <div className="flex justify-end">
+          <Button className="my-3 bg-blue-500 hover:bg-blue-600" type="submit">
+            Add Flashcard
+          </Button>
+        </div>
       </form>
     </Form>
   );

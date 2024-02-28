@@ -5,5 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
-export default fetcher;
+export enum Difficulty {
+  EASY,
+  MEDIUM,
+  HARD,
+}
+// const fetcher = (url) => fetch(url).then((r) => r.json());
+
+// export default fetcher;

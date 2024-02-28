@@ -1,10 +1,11 @@
 "use client";
 
 import { SWRConfig } from "swr";
+import { ReactNode } from "react";
 
 // const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const fetcher = (url: string, data: object) => {
+const fetcher = async (url: string, data: object) => {
   const options: RequestInit = {
     headers: new Headers({
       "Content-Type": "application/json",
@@ -23,6 +24,6 @@ const fetcher = (url: string, data: object) => {
   });
 };
 
-export const SWRProvider = ({ children }) => {
+export const SWRProvider = ({ children }: { children: ReactNode }) => {
   return <SWRConfig value={{ fetcher }}>{children}</SWRConfig>;
 };

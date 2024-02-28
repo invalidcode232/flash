@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Form, FormField } from "@/components/ui/form";
 import useSWR from "swr";
+import { Difficulty } from "@/lib/utils";
 
 type FlashcardWithChoices = Prisma.FlashcardGetPayload<{
   include: {
@@ -23,19 +24,7 @@ type FlashcardWithChoices = Prisma.FlashcardGetPayload<{
   };
 }>;
 
-enum Difficulty {
-  EASY,
-  MEDIUM,
-  HARD,
-}
-
-const Flashcard = ({
-  flashcard,
-  reload,
-}: {
-  flashcard: FlashcardWithChoices;
-  reload: () => void;
-}) => {
+const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [shouldUpdateDate, setShouldUpdateDate] = useState(false);
   const [isChoiceCorrect, setIsChoiceCorrect] = useState(false);
@@ -55,7 +44,7 @@ const Flashcard = ({
       }),
     }).then((res) => {
       setShouldUpdateDate(false);
-      reload();
+      location.reload();
       return res.json();
     }),
   );

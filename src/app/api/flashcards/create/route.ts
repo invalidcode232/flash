@@ -11,11 +11,11 @@ interface FlashcardFormData {
 }
 
 export async function POST(req: Request) {
-  const formData = await req.formData();
+  const formData = await req.json();
 
   const flashcardData: FlashcardFormData = {
-    question: formData.get("question") as string,
-    choices: JSON.parse((formData.get("choices") as string) || "[]"),
+    question: formData.question,
+    choices: formData.choices || "[]",
   };
 
   if (!flashcardData.question || !flashcardData.choices.length) {
@@ -30,15 +30,17 @@ export async function POST(req: Request) {
         choices: {
           create: flashcardData.choices.map((choice) => ({
             choice: choice.text,
-            is_correct: choice.isCorrect,
+            is_correct: choice.isCorrect === false ? false : true,
           })),
         },
       },
     });
 
-    return JSON.stringify(createdFlashcard);
+    return new Response(JSON.stringify(createdFlashcard));
   } catch (error) {
     console.error(error);
-    return JSON.stringify({ error: "Failed to create flashcard" });
+    return new Response(
+      JSON.stringify({ error: "Failed to create flashcard" }),
+    );
   }
 }

@@ -54,7 +54,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 const NavBar = () => {
   return (
-    <div className="w-screen bg-slate-100">
+    <div className="w-screen bg-slate-100 dark:bg-slate-800">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
