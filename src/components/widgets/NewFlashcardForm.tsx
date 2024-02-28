@@ -33,10 +33,10 @@ const NewFlashcardForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div>
+        <div className="rounded-md border-2 border-slate-200 p-4">
           <FormItem>
             <FormLabel>Question</FormLabel>
-            <FormControl>
+            <FormControl className="w-full">
               <Input
                 type="text"
                 {...form.register("question", {
@@ -46,7 +46,7 @@ const NewFlashcardForm = () => {
             </FormControl>
           </FormItem>
 
-          <FormControl>
+          <FormControl className="mt-3">
             <RadioGroup>
               {fields.map((field, index) => (
                 <FormItem key={field.id}>
@@ -76,24 +76,27 @@ const NewFlashcardForm = () => {
 
                   <Button
                     type="button"
-                    className="ml-2 bg-red-500 text-sm"
+                    className="ml-2 bg-red-500 px-2 py-0 text-xs"
                     onClick={() => remove(index)}
                   >
-                    Remove Choice
+                    Remove
                   </Button>
                 </FormItem>
               ))}
             </RadioGroup>
           </FormControl>
+
           <Button
             type="button"
-            className="my-2 bg-green-500"
+            className="my-2 bg-green-500 hover:bg-green-600"
             onClick={() => append({ text: "", isCorrect: false })}
           >
             Add Choice
           </Button>
         </div>
-        <Button type="submit">Submit Choices</Button>
+        <Button className="my-3 bg-blue-500 hover:bg-blue-600" type="submit">
+          Add Flashcard
+        </Button>
       </form>
     </Form>
   );

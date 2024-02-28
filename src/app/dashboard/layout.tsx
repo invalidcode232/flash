@@ -1,6 +1,6 @@
 import NavBar from "@/components/widgets/navbar";
 
-const FlashcardLayout = ({
+const DashboardLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -8,11 +8,9 @@ const FlashcardLayout = ({
   return (
     <div className="text-slate-500">
       <NavBar />
-      <div className="flex justify-center px-14 md:px-28 md:py-4 lg:px-48">
-        {children}
-      </div>
+      <div className="px-14 md:px-28 md:py-4 lg:px-48">{children}</div>
     </div>
   );
 };
 
-export default FlashcardLayout;
+export default DashboardLayout;

@@ -15,9 +15,7 @@ const RadioChoice = ({ id, label, value }: ChoiceData) => {
         <RadioGroupItem value={value} id={id} />
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor={id} className="ml-1 text-sm">
-          {label}
-        </FormLabel>
+        <FormLabel htmlFor={id}>{label}</FormLabel>
       </FormControl>
     </>
   );
