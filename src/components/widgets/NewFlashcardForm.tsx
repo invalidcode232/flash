@@ -1,5 +1,10 @@
 import React from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import {
+  useForm,
+  useFieldArray,
+  SubmitHandler,
+  FieldValues,
+} from "react-hook-form";
 import {
   Form,
   FormField,
@@ -41,7 +46,9 @@ const NewFlashcardForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit as SubmitHandler<FieldValues>)}
+      >
         <div className="rounded-md border-2 border-slate-200 p-4 dark:border-slate-700 dark:text-white">
           <FormItem>
             <FormLabel>Question</FormLabel>
