@@ -42,7 +42,7 @@ const NewFlashcardForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="rounded-md border-2 border-slate-200 p-4">
+        <div className="rounded-md border-2 border-slate-200 p-4 dark:border-slate-700 dark:text-white">
           <FormItem>
             <FormLabel>Question</FormLabel>
             <FormControl className="w-full">
@@ -101,14 +101,17 @@ const NewFlashcardForm = () => {
 
           <Button
             type="button"
-            className="my-2 bg-green-500 hover:bg-green-600"
+            className="my-2 bg-green-500 hover:bg-green-600 dark:text-slate-200"
             onClick={() => append({ text: "", isCorrect: false })}
           >
             Add Choice
           </Button>
         </div>
         <div className="flex justify-end">
-          <Button className="my-3 bg-blue-500 hover:bg-blue-600" type="submit">
+          <Button
+            className="my-3 bg-blue-500 hover:bg-blue-600 dark:text-slate-200"
+            type="submit"
+          >
             Add Flashcard
           </Button>
         </div>

@@ -30,19 +30,26 @@ const FlashcardPage = () => {
   return (
     <>
       <div className="mb-5 flex justify-between">
-        <span className="text-2xl font-semibold text-black">Flashcards</span>
+        <span className="text-2xl font-semibold dark:text-slate-200">
+          Flashcards
+        </span>
         <div>
           <Button
-            className="mr-2 bg-blue-500 hover:bg-blue-600"
+            className="mr-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-300 dark:text-black dark:hover:bg-blue-400"
             onClick={() => router.replace("/flashcards")}
           >
             Do flashcards
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline">New Flashcard..</Button>
+              <Button
+                variant="outline"
+                className="dark:bg-slate-600 dark:text-slate-200 dark:hover:bg-slate-700"
+              >
+                New Flashcard..
+              </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="py-6 sm:max-w-[425px]">
               <DialogHeader>
                 <DialogTitle>Add a new flashcard</DialogTitle>
                 <DialogDescription>

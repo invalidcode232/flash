@@ -1,4 +1,4 @@
-import { Flashcard, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import {
   Card,
   CardContent,
@@ -26,12 +26,13 @@ const prettyDate = (date: Date) => {
 };
 
 const FlashcardOverview = ({ flashcard }: Props) => {
-  console.log(flashcard);
   return (
-    <Card>
+    <Card className="border-2 hover:border-blue-500 dark:border-slate-700 dark:bg-slate-700 dark:hover:border-blue-500">
       <CardHeader>
-        <CardTitle>{flashcard.question}</CardTitle>
-        <CardDescription>
+        <CardTitle className="dark:text-slate-200">
+          {flashcard.question}
+        </CardTitle>
+        <CardDescription className="dark:text-slate-300">
           {/* Next date: {flashcard.next_date.toString().split("T")[0]} */}
           Next date: {prettyDate(flashcard.next_date)}
         </CardDescription>
@@ -40,7 +41,7 @@ const FlashcardOverview = ({ flashcard }: Props) => {
         {flashcard.choices.map((choice) => (
           <div
             key={choice.id}
-            className={`my-1 rounded-sm ${choice.is_correct ? "bg-green-100" : "bg-slate-100"} p-1`}
+            className={`my-1 rounded-sm ${choice.is_correct ? "bg-green-200 dark:text-slate-600" : "bg-slate-100 dark:text-slate-600"} p-1`}
           >
             {choice.choice}
           </div>

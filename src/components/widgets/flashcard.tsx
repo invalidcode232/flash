@@ -28,6 +28,7 @@ const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [shouldUpdateDate, setShouldUpdateDate] = useState(false);
   const [isChoiceCorrect, setIsChoiceCorrect] = useState(false);
+  const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.EASY);
 
   const form = useForm();
 
@@ -40,7 +41,7 @@ const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
       method: "POST",
       body: JSON.stringify({
         flashcardId: flashcard.id,
-        difficulty: Difficulty.EASY,
+        difficulty: difficulty,
       }),
     }).then((res) => {
       setShouldUpdateDate(false);
@@ -50,6 +51,7 @@ const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
   );
 
   const onFlashcardComplete = (difficulty: Difficulty) => {
+    setDifficulty(difficulty);
     setShouldUpdateDate(true);
   };
 
@@ -119,9 +121,7 @@ const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
                     key={choice.id}
                     className={`my-4 ${isChoiceCorrect ? "text-green-500" : "text-red-500"}`}
                   >
-                    {isChoiceCorrect
-                      ? "Your answer is correct!"
-                      : `Incorrect. The correct answer should be ${choice.choice}`}
+                    {isChoiceCorrect ? "Your answer is correct!" : `Incorrect.`}
                   </p>
                 ),
             )}
