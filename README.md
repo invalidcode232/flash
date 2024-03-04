@@ -6,5 +6,5 @@ Backend with [PostgreSQL](https://www.postgresql.org/) and [Prisma](https://www.
 
 ## Features
 - Answer flashcards and rate your confidence in your answer
-- Create, edit, and delete flashcards (TODO)
+- Create, edit, and delete flashcards (except delete!)
 - Organize flashcards into decks (TODO)
